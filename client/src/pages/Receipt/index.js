@@ -130,7 +130,6 @@ const Receipt = () => {
                     forceUpdate()
                 })
                 .catch(function (error) {
-                    console.log(error)
                     toast({
                         title: error.response.data,
                         description: "Id not found",
@@ -395,6 +394,7 @@ const Receipt = () => {
                                 label={"Cancel"}
                                 color={'red.400'}
                                 hoverColor={'red.500'}
+                                onClick={() => navigate("/dash")}
                             />
                             <ButtonComponent
                                 label={"Submit"}
