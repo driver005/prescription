@@ -355,7 +355,7 @@ const Receipt = () => {
                         py={6}
                     >
                         <Heading lineHeight={1.1} fontSize={{ base: '2xl', md: '3xl' }}>
-                            Recept
+                            Rezept
                         </Heading>
                         <Patient
                             form={form}
