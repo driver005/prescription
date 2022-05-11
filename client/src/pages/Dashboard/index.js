@@ -37,7 +37,7 @@ const Dashbord = () => {
         <div>
             <Stack p={6}>
                 <Stack direction={['column', 'row']} spacing={8} p={6} px={0}>
-                    <CardContainer onClick={() => handelClick('create')} label={"Pending"} noFound={prescription.length === 0} icon={<IoIosAdd on size={25} />}>
+                    <CardContainer onClick={() => handelClick('create')} label={"All Prescription"} noFound={prescription.length === 0} icon={<IoIosAdd on size={25} />}>
                         {prescription.map((data) => (
                             <CardItem
                                 label={"Prescription"}
