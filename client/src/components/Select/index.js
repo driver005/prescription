@@ -34,6 +34,7 @@ const SelectComponent = ({ id, label, values, register, name, onChange, defaultV
                                     value={value}
                                     textTransform="capitalize"
                                     label={value}
+                                    fixed
                                 />
                             ))}
                         </AutoCompleteList>

@@ -365,59 +365,87 @@ const Receipt = () => {
         <Background>
             <chakra.form w={"100vw"} d={"flex"} onSubmit={onSubmit}>
                 <Stack spacing={8} direction='row' w={"100%"} mx={6} my={10}>
-                    <Stack
-                        spacing={4}
-                        px={10}
-                        bg={bg}
-                        w={"100%"}
-                        borderColor={'blue.400'}
-                        borderWidth={2}
-                        borderRadius={"lg"}
-                        py={6}
-                    >
-                        <Heading lineHeight={1.1} fontSize={{ base: '2xl', md: '3xl' }}>
-                            Rezept
-                        </Heading>
-                        <Patient
-                            form={form}
-                            patient={patient}
-                            handleTextChange={handleTextChange}
-                            getAge={getAge}
-                        />
-                        <Doctor
-                            doctor={doctor}
-                            form={form}
-                            userIsDoctor={userIsPatient}
-                            handleTextChange={handleTextChange}
-                        />
-                        <Pharmacist
-                            pharmacist={pharmacist}
-                            form={form}
-                            handleTextChange={handleTextChange}
-                        />
-                        <Fields
-                            form={form}
-                            handleTextChange={handleTextChange}
-                            noctuInTime={noctuInTime}
-                            numberOfPacks={numberOfPacks}
-                            setNumberOfPacks={setNumberOfPacks}
-                            setSonderPZN={setSonderPZN}
-                            sonderPZN={sonderPZN}
-                        />
-                        <Invoice
-                            form={form}
-                        />
-                        <Stack spacing={6} direction={['column', 'row']}>
-                            <ButtonComponent
-                                label={"Cancel"}
-                                color={'red.400'}
-                                hoverColor={'red.500'}
-                                onClick={() => navigate("/dash")}
+                    <Stack w={"100%"}>
+                        <Stack
+                            spacing={4}
+                            px={10}
+                            bg={bg}
+                            w={"100%"}
+                            borderColor={'blue.400'}
+                            borderWidth={2}
+                            borderRadius={"lg"}
+                            py={6}
+                        >
+                            <Heading lineHeight={1.1} fontSize={{ base: '2xl', md: '3xl' }}>
+                                Für wenn is das Rezept
+                            </Heading>
+                            <Patient
+                                form={form}
+                                patient={patient}
+                                handleTextChange={handleTextChange}
+                                getAge={getAge}
                             />
-                            <ButtonComponent
-                                label={"Submit"}
-                                type={"submit"}
+                            <Doctor
+                                doctor={doctor}
+                                form={form}
+                                userIsDoctor={userIsPatient}
+                                handleTextChange={handleTextChange}
                             />
+                            <Pharmacist
+                                pharmacist={pharmacist}
+                                form={form}
+                                handleTextChange={handleTextChange}
+                            />
+                        </Stack>
+                        <Stack
+                            spacing={4}
+                            px={10}
+                            bg={bg}
+                            w={"100%"}
+                            borderColor={'blue.400'}
+                            borderWidth={2}
+                            borderRadius={"lg"}
+                            py={6}
+                        >
+                            <Heading lineHeight={1.1} fontSize={{ base: '2xl', md: '3xl' }}>
+                                Rezept
+                            </Heading>
+                            <Fields
+                                form={form}
+                                handleTextChange={handleTextChange}
+                                noctuInTime={noctuInTime}
+                                numberOfPacks={numberOfPacks}
+                                setNumberOfPacks={setNumberOfPacks}
+                                setSonderPZN={setSonderPZN}
+                                sonderPZN={sonderPZN}
+                                userIsDoctor={userIsPatient}
+                            />
+                        </Stack>
+                        <Stack
+                            spacing={4}
+                            px={10}
+                            bg={bg}
+                            w={"100%"}
+                            borderColor={'blue.400'}
+                            borderWidth={2}
+                            borderRadius={"lg"}
+                            py={6}
+                        >
+                            <Invoice
+                                form={form}
+                            />
+                            <Stack spacing={6} direction={['column', 'row']}>
+                                <ButtonComponent
+                                    label={"Cancel"}
+                                    color={'red.400'}
+                                    hoverColor={'red.500'}
+                                    onClick={() => navigate("/dash")}
+                                />
+                                <ButtonComponent
+                                    label={"Submit"}
+                                    type={"submit"}
+                                />
+                            </Stack>
                         </Stack>
                     </Stack>
                     <Product

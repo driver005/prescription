@@ -9,7 +9,7 @@ const bool = [
 ];
 
 
-const Fields = ({ form, handleTextChange, noctuInTime, sonderPZN, setSonderPZN, numberOfPacks, setNumberOfPacks = function () { } }) => {
+const Fields = ({ form, handleTextChange, noctuInTime, sonderPZN, setSonderPZN, numberOfPacks, userIsDoctor, setNumberOfPacks = function () { } }) => {
     return (
         <React.Fragment>
             <InputComponent
@@ -28,6 +28,15 @@ const Fields = ({ form, handleTextChange, noctuInTime, sonderPZN, setSonderPZN, 
                 values={bool}
                 onChange={(e) => handleTextChange(e, "workAccident")}
                 defaultValue={form.workAccident && form.workAccident}
+                disabled={!userIsDoctor}
+            />
+            <InputComponent
+                id={"workAccidentDate"}
+                label={"Arbeitsunfalltag"}
+                name={"workAccidentDate"}
+                type={"text"}
+                value={form.workAccident === "Ja" ? form.workAccidentDate : ""}
+                disabled={form.workAccident === "Nein" ? true : !userIsDoctor && true}
             />
             <SelectComponent
                 id={"fees"}
@@ -45,7 +54,7 @@ const Fields = ({ form, handleTextChange, noctuInTime, sonderPZN, setSonderPZN, 
                 value={form.noctu && form.noctu}
                 values={["Der Patient hat die Medizin in einer dringlichen Situation geholt. Es entspricht dem Zweck des nächtlichen Apothekennotdienstes."]}
                 onChange={(e) => handleTextChange(e, "noctu")}
-                disabled={noctuInTime()}
+                disabled={noctuInTime() || userIsDoctor}
                 defaultValue={form.noctu && form.noctu}
             />
             <InputComponent
@@ -65,21 +74,16 @@ const Fields = ({ form, handleTextChange, noctuInTime, sonderPZN, setSonderPZN, 
                 values={bool}
                 onChange={(e) => handleTextChange(e, "subjectToJustification")}
                 defaultValue={form.subjectToJustification && form.subjectToJustification}
+                disabled={userIsDoctor}
             />
-            <InputComponent
-                id={"workAccidentDate"}
-                label={"Arbeitsunfalltag"}
-                name={"workAccidentDate"}
-                type={"text"}
-                value={form.workAccidentDate}
-                disabled={true}
-            />
+
             <InputComponent
                 id={"deliveryCosts"}
                 label={"Lieferkosten"}
                 name={"deliveryCosts"}
                 icon={'€'}
                 value={form.deliveryCosts}
+                disabled={userIsDoctor}
                 onChange={async (e) => {
                     handleTextChange(e.target)
 
@@ -98,6 +102,7 @@ const Fields = ({ form, handleTextChange, noctuInTime, sonderPZN, setSonderPZN, 
                 values={[sonderPZN[0]]}
                 onChange={(e) => handleTextChange(e, "sonderPZN")}
                 defaultValue={form.sonderPZN && form.sonderPZN}
+                disabled={userIsDoctor}
             />
             <SelectComponent
                 id={"factor"}
@@ -115,13 +120,13 @@ const Fields = ({ form, handleTextChange, noctuInTime, sonderPZN, setSonderPZN, 
                     "8 - Nichtabgabe eines rabattbegünstigten Arzneimittels aufgrund sonstiger Bedenken nach § 17 Abs. 5 S. 2 Apothekenbetriebsordnung in allen Auswahlbereichen nach § 9 Abs. 1 und 2 (§ 14 Abs. 3)",
                     "9 - Nichtabgabe eines rabattbegünstigten Fertigarzneimittel sowie eines preisgünstigen Fertigarzneimittels aufgrund sonstiger Bedenken nach § 17 Abs. 5 S. 2 Apothekenbetriebs- ordnung im generischen Markt (§ 14 Abs. 3 – sonstige Bedenken gegen das rabattbe- günstigte Fertigarzneimittel (sofern vorhanden) und gegen das preisgünstige Fertigarznei- mittel) oder Nichtabgabe eines rabattbegünstigten Fertigarzneimittels sowie Abweichung von der Importabgabe aufgrund sonstiger Bedenken nach § 17 Abs. 5 S. 2 Apothekenbe- triebsordnung im importrelevanten Markt (§ 14 Abs. 4 i. V. m. Abs. 3 – sonstige Bedenken gegen das rabattbegünstigte Fertigarzneimittel (sofern vorhanden) und gegen das preis- günstige Importarzneimittel)"
                 ]}
-                disabled={form.sonderPZN !== "02567024"}
+                disabled={form.sonderPZN !== "02567024" || userIsDoctor}
                 onChange={(e) => handleTextChange(e.substring(0, 1), "factor")}
                 defaultValue={form.factor && form.factor}
             />
-            <FormControl id={"numberOfPacks"}>
+            <FormControl id={"numberOfPacks"} isDisabled={userIsDoctor}>
                 <FormLabel>Verpackungsanzahl</FormLabel>
-                <NumberInput defaultValue={1} value={numberOfPacks} onChange={(e) => setNumberOfPacks(e)}>
+                <NumberInput defaultValue={0} value={numberOfPacks} onChange={(e) => setNumberOfPacks(e)} disabled={userIsDoctor}>
                     <NumberInputField />
                     <NumberInputStepper>
                         <NumberIncrementStepper />
