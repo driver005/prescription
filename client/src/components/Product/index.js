@@ -19,8 +19,8 @@ const Product = ({ products, medication, form, handleTextChange, isOpen, setIsOp
     return (
         <CustomCardWrapper
             width='45%'
-            label={'Products'}
-            modalLabel={"Create Product"}
+            label={'Produkt'}
+            modalLabel={"Produkt Hinzufügen"}
             isOpen={isOpen}
             setIsOpen={setIsOpen}
             handelOnClose={handelOnClose}
@@ -32,6 +32,7 @@ const Product = ({ products, medication, form, handleTextChange, isOpen, setIsOp
                         id={"arzneimittel"}
                         label={"Arzneimittel"}
                         name={"arzneimittel"}
+                        value={form.medication && form.medication.name}
                         values={medication.map(medication => medication.name)}
                         onChange={(e) => handleTextChange(medication.find(meds => meds.name === e), "medication")}
                     />
@@ -46,7 +47,7 @@ const Product = ({ products, medication, form, handleTextChange, isOpen, setIsOp
                     />
                     <InputComponent
                         id={"price"}
-                        label={"Price"}
+                        label={"Preis"}
                         name={"price"}
                         type={"text"}
                         addon={'Arzneimittel'}
@@ -60,8 +61,24 @@ const Product = ({ products, medication, form, handleTextChange, isOpen, setIsOp
                         values={[
                             "ID - nur der Patient kann das Rezept abholen und muss sie bei der Apotheke ausweisen",
                             "Dj - Dem Patient wurde eine ausreichende Dosierungsinstruktion ausgehändigt",
+                            "0-0-0",
+                            "1-0-0",
+                            "1-1-0",
+                            "1-1-1",
+                            "1-0-1",
+                            "0-1-0",
+                            "0-0-1",
+                            "0-1-1"
                         ]}
                         onChange={(e) => handleTextChange(e.substring(0, 2), "dosage")}
+                    />
+                    <SelectComponent
+                        id={"aut_Idem"}
+                        label={"aut. Idem"}
+                        name={"aut_Idem"}
+                        value={form.aut_Idem && form.aut_Idem}
+                        values={["Die Verweigerung der Supplimentierung darf auschließlich aufgrund von ärztlichen Bedenken geschehen.", "Die Verweigerung der Supplimentierung ist erlaubt."]}
+                        onChange={(e) => handleTextChange(e, "aut_Idem")}
                     />
                     <FormControl id={"dosis"}>
                         <FormLabel>Dosis</FormLabel>

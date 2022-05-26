@@ -7,11 +7,12 @@ const Doctor = ({ doctor, form, handleTextChange }) => {
         <React.Fragment>
             <SelectComponent
                 id={"doctor"}
-                label={"Doctor"}
+                label={"Doktor"}
                 name={"doctor"}
                 value={form.doctor && form.doctor.name}
                 values={doctor.map(user => user.name)}
                 onChange={(e) => handleTextChange(doctor.find(user => user.name === e), "doctor", true)}
+                defaultValue={form.doctor && form.doctor.name}
             />
             <InputComponent
                 id={"lanr"}
@@ -24,7 +25,7 @@ const Doctor = ({ doctor, form, handleTextChange }) => {
             />
             <InputComponent
                 id={"jobTitle"}
-                label={"Job title"}
+                label={"Arbeitstitel"}
                 name={"jobTitle"}
                 type={"text"}
                 addon={'Doctor'}
@@ -42,56 +43,47 @@ const Doctor = ({ doctor, form, handleTextChange }) => {
             />
             <InputComponent
                 id={"city"}
-                label={"City"}
+                label={"Stadt"}
                 name={"city"}
                 type={"text"}
-                addon={'Doctor address'}
+                addon={'Patient address'}
                 placeholder={'City'}
                 value={form.doctor && form.doctor.address.city}
             />
             <InputComponent
                 id={"street"}
-                label={"Street"}
+                label={"Straße"}
                 name={"street"}
                 type={"text"}
-                addon={'Doctor address'}
-                placeholder={'Street'}
+                addon={'Patient address'}
+                placeholder={'Straße'}
                 value={form.doctor && form.doctor.address.street}
             />
             <InputComponent
                 id={"country"}
-                label={"Country"}
+                label={"Land"}
                 name={"country"}
                 type={"text"}
-                addon={'Doctor address'}
-                placeholder={'Country'}
+                addon={'Patient address'}
+                placeholder={'Land'}
                 value={form.doctor && form.doctor.address.country}
             />
             <InputComponent
                 id={"zip"}
-                label={"Zip"}
+                label={"Postleitzahl"}
                 name={"zip"}
                 type={"text"}
-                addon={'Doctor address'}
-                placeholder={'Zip'}
+                addon={'Patient address'}
+                placeholder={'Postleitzahl'}
                 value={form.doctor && form.doctor.address.zip}
             />
             <InputComponent
                 id={"phone"}
-                label={"Phone"}
+                label={"Telefonnumer"}
                 name={"phone"}
                 type={"text"}
                 addon={'Doctor'}
-                placeholder={'Phone'}
-                value={form.doctor && form.doctor.phone}
-            />
-            <InputComponent
-                id={"phone"}
-                label={"Phone"}
-                name={"phone"}
-                type={"text"}
-                addon={'Doctor'}
-                placeholder={'Phone'}
+                placeholder={'Telefonnumer'}
                 value={form.doctor && form.doctor.phone}
             />
             <InputComponent

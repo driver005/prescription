@@ -39,15 +39,15 @@ const CardItem = ({ label, patient, doctor, insurance, pharmacist, children }) =
                     </ListItem>
                     <ListItem>
                         <ListIcon as={BsCheck} color="green.400" />
-                        Doctor: {doctor}
+                        Doktor: {doctor}
                     </ListItem>
                     <ListItem>
                         <ListIcon as={BsCheck} color="green.400" />
-                        Insurance: {insurance}
+                        Versicherung: {insurance}
                     </ListItem>
                     <ListItem>
                         <ListIcon as={BsCheck} color="green.400" />
-                        Pharmacist: {pharmacist}
+                        Apotheke: {pharmacist}
                     </ListItem>
                 </List>
                 {children}

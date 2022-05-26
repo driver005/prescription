@@ -2,8 +2,7 @@ import React from 'react'
 import InputComponent from '../../components/Input'
 import SelectComponent from '../../components/Select'
 
-const Patient = ({ patient, form, handleTextChange, userIsPatient }) => {
-
+const Patient = ({ patient, form, handleTextChange, userIsPatient, getAge }) => {
     return (
         <React.Fragment>
             <SelectComponent
@@ -13,7 +12,7 @@ const Patient = ({ patient, form, handleTextChange, userIsPatient }) => {
                 value={form.patient && form.patient.name}
                 values={patient.map(user => user.name)}
                 onChange={(e) => handleTextChange(patient.find(user => user.name === e), "patient", true)}
-                defaultValue={userIsPatient && patient.map(user => user.name)[0]}
+                defaultValue={userIsPatient ? patient.map(user => user.name)[0] : form.patient && form.patient.name}
             />
             <InputComponent
                 id={"name"}
@@ -35,7 +34,7 @@ const Patient = ({ patient, form, handleTextChange, userIsPatient }) => {
             />
             <InputComponent
                 id={"city"}
-                label={"City"}
+                label={"Stadt"}
                 name={"city"}
                 type={"text"}
                 addon={'Patient address'}
@@ -44,29 +43,29 @@ const Patient = ({ patient, form, handleTextChange, userIsPatient }) => {
             />
             <InputComponent
                 id={"street"}
-                label={"Street"}
+                label={"Straße"}
                 name={"street"}
                 type={"text"}
                 addon={'Patient address'}
-                placeholder={'Street'}
+                placeholder={'Straße'}
                 value={form.patient && form.patient.address.street}
             />
             <InputComponent
                 id={"country"}
-                label={"Country"}
+                label={"Land"}
                 name={"country"}
                 type={"text"}
                 addon={'Patient address'}
-                placeholder={'Country'}
+                placeholder={'Land'}
                 value={form.patient && form.patient.address.country}
             />
             <InputComponent
                 id={"zip"}
-                label={"Zip"}
+                label={"Postleitzahl"}
                 name={"zip"}
                 type={"text"}
                 addon={'Patient address'}
-                placeholder={'Zip'}
+                placeholder={'Postleitzahl'}
                 value={form.patient && form.patient.address.zip}
             />
             <InputComponent
@@ -80,20 +79,29 @@ const Patient = ({ patient, form, handleTextChange, userIsPatient }) => {
             />
             <InputComponent
                 id={"birthday"}
-                label={"Birthday"}
+                label={"Geburtstag"}
                 name={"birthday"}
                 type={"text"}
                 addon={'Patient'}
-                placeholder={'Birthday'}
+                placeholder={'Geburtstag'}
                 value={form.patient && form.patient.birthday}
             />
             <InputComponent
+                id={"birthday"}
+                label={"Alter"}
+                name={"age"}
+                type={"text"}
+                addon={'Patient'}
+                placeholder={'Alter'}
+                value={form.patient && getAge(form.patient.birthday)}
+            />
+            <InputComponent
                 id={"insuranceName"}
-                label={"Insurance name"}
+                label={"Versicherung"}
                 name={"insuranceName"}
                 type={"text"}
                 addon={'Patient employer'}
-                placeholder={'Insurance name'}
+                placeholder={'Versicherung'}
                 value={form.patient && form.patient.employer.insurance.name}
             />
             <InputComponent
@@ -107,11 +115,11 @@ const Patient = ({ patient, form, handleTextChange, userIsPatient }) => {
             />
             <InputComponent
                 id={"number"}
-                label={"Number"}
+                label={"Nummer"}
                 name={"number"}
                 type={"text"}
                 addon={'Patient employer'}
-                placeholder={'Number'}
+                placeholder={'Nummer'}
                 value={form.patient && form.patient.employer.number}
             />
         </React.Fragment>

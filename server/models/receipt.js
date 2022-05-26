@@ -51,10 +51,6 @@ const ReceiptSchema = new mongoose.Schema({
         type: Boolean,
         default: false,
     },
-    aut_Idem: {
-        type: String,
-        default: '',
-    },
     deliveryCosts: {
         type: String,
         default: '',
@@ -105,6 +101,10 @@ const ReceiptSchema = new mongoose.Schema({
             default: 0,
         },
         dosage: {
+            type: String,
+            default: '',
+        },
+        aut_Idem: {
             type: String,
             default: '',
         },

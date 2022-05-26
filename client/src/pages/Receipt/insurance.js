@@ -12,6 +12,7 @@ const Insurance = ({ insurance, form, handleTextChange }) => {
                 value={form.insurance && form.insurance.name}
                 values={insurance.filter(user => user.insuranceIsOfState === (form.workAccident === 'Yes' ? true : false)).map(user => user.name)}
                 onChange={(e) => handleTextChange(insurance.find(user => user.name === e), "insurance", true)}
+                defaultValue={form.insurance && form.insurance.name}
             />
             <InputComponent
                 id={"name"}
@@ -33,7 +34,7 @@ const Insurance = ({ insurance, form, handleTextChange }) => {
             />
             <InputComponent
                 id={"insuranceIsOfState"}
-                label={"Is Insurance of state"}
+                label={"Staatlich"}
                 name={"insuranceIsOfState"}
                 type={"text"}
                 addon={'Insurance'}

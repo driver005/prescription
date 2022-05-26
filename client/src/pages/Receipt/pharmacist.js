@@ -7,11 +7,12 @@ const Pharmacist = ({ pharmacist, form, handleTextChange }) => {
         <React.Fragment>
             <SelectComponent
                 id={"pharmacist"}
-                label={"Pharmacist"}
+                label={"Apotheke"}
                 name={"pharmacist"}
                 value={form.pharmacist && form.pharmacist.name}
                 values={pharmacist.map(user => user.name)}
                 onChange={(e) => handleTextChange(pharmacist.find(user => user.name === e), "pharmacist", true)}
+                defaultValue={form.pharmacist && form.pharmacist.name}
             />
             <InputComponent
                 id={"name"}
@@ -33,38 +34,38 @@ const Pharmacist = ({ pharmacist, form, handleTextChange }) => {
             />
             <InputComponent
                 id={"city"}
-                label={"City"}
+                label={"Stadt"}
                 name={"city"}
                 type={"text"}
-                addon={'Pharmacist address'}
+                addon={'Patient address'}
                 placeholder={'City'}
                 value={form.pharmacist && form.pharmacist.address.city}
             />
             <InputComponent
                 id={"street"}
-                label={"Street"}
+                label={"Straße"}
                 name={"street"}
                 type={"text"}
-                addon={'Pharmacist address'}
-                placeholder={'Street'}
+                addon={'Patient address'}
+                placeholder={'Straße'}
                 value={form.pharmacist && form.pharmacist.address.street}
             />
             <InputComponent
                 id={"country"}
-                label={"Country"}
+                label={"Land"}
                 name={"country"}
                 type={"text"}
-                addon={'Pharmacist address'}
-                placeholder={'Country'}
+                addon={'Patient address'}
+                placeholder={'Land'}
                 value={form.pharmacist && form.pharmacist.address.country}
             />
             <InputComponent
                 id={"zip"}
-                label={"Zip"}
+                label={"Postleitzahl"}
                 name={"zip"}
                 type={"text"}
-                addon={'Pharmacist address'}
-                placeholder={'Zip'}
+                addon={'Patient address'}
+                placeholder={'Postleitzahl'}
                 value={form.pharmacist && form.pharmacist.address.zip}
             />
         </React.Fragment>

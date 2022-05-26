@@ -17,6 +17,16 @@ import { generateReceipt, updateReceipt } from '../../action/receipt'
 import { useNavigate, useParams } from 'react-router-dom'
 
 
+function getAge(dateString) {
+    var today = new Date();
+    var birthDate = new Date(dateString);
+    var age = today.getFullYear() - birthDate.getFullYear();
+    var m = today.getMonth() - birthDate.getMonth();
+    if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+        age--;
+    }
+    return age;
+}
 
 //create your forceUpdate hook
 function useForceUpdate() {
@@ -31,7 +41,7 @@ const initialState = {
     noctu: null,
     other: null,
     subjectToJustification: null,
-    aut_Idem: null,
+
     deliveryCosts: null,
     sonderPZN: null,
     factor: null,
@@ -54,12 +64,15 @@ const initialStateProducts = {
     medication: null,
     dosis: 1,
     dosage: null,
+    aut_Idem: null,
 };
 
 const Receipt = () => {
+    const bg = useColorModeValue('white', 'gray.700')
     const toast = useToast()
     const navigate = useNavigate();
     let { id } = useParams();
+    const [loading, setLoading] = useState(true)
     const userIsPatient = JSON.parse(localStorage.getItem('user')).type === "patient"
     const [form, setForm] = React.useState(initialState);
     const [formProducts, setFormProducts] = React.useState(initialStateProducts);
@@ -102,14 +115,13 @@ const Receipt = () => {
                         doctor: data.data.doctor,
                         insurance: data.data.insurance,
                         pharmacist: data.data.pharmacist,
-                        workAccident: data.data.workAccident === true ? "Yes" : "No",
+                        workAccident: data.data.workAccident === true ? "Ja" : "Nein",
                         date: data.data.date,
                         workAccidentDate: data.data.workAccidentDate,
-                        fees: data.data.fees === true ? "Yes" : "No",
+                        fees: data.data.fees === true ? "Ja" : "Nein",
                         noctu: data.data.noctu,
                         other: data.data.other,
-                        subjectToJustification: data.data.subjectToJustification === true ? "Yes" : "No",
-                        aut_Idem: data.data.aut_Idem,
+                        subjectToJustification: data.data.subjectToJustification === true ? "Ja" : "Nein",
                         deliveryCosts: data.data.deliveryCosts,
                         sonderPZN: data.data.sonderPZN,
                         factor: data.data.factor,
@@ -125,6 +137,7 @@ const Receipt = () => {
                     setProducts(data.data.medications.map(product => ({
                         dosis: product.dosis,
                         dosage: product.dosage,
+                        aut_Idem: product.aut_Idem,
                         ...product.medication
                     })))
                     forceUpdate()
@@ -139,6 +152,7 @@ const Receipt = () => {
                     })
                 })
         }
+        setLoading(false)
     }, [])
 
     useEffect(() => {
@@ -228,16 +242,17 @@ const Receipt = () => {
 
 
     const handelOnClose = () => {
-        if (formProducts.medication) {
+        if (formProducts.medication && formProducts.dosis && formProducts.dosage && formProducts.aut_Idem) {
             setProducts(product => [
                 ...product,
                 {
                     ...formProducts.medication,
                     dosis: formProducts.dosis,
                     dosage: formProducts.dosage,
+                    aut_Idem: formProducts.aut_Idem,
                 }
             ])
-            setNumberOfPacks(numberOfPacks + parseInt(formProducts.dosis))
+            // setNumberOfPacks(numberOfPacks + parseInt(formProducts.dosis))
 
 
         }
@@ -254,25 +269,25 @@ const Receipt = () => {
 
     const onSubmit = (e) => {
         e.preventDefault();
-        if (form && form.patient && form.doctor && form.insurance && form.pharmacist) {
+        if (form && form.patient && form.doctor && form.pharmacist) {
             const product = products.map(product => ({
                 "medication": product._id,
                 "dosis": product.dosis,
                 "dosage": product.dosage,
+                "formProducts": product.aut_Idem,
             }))
             const data = {
                 patient: form.patient._id,
                 doctor: form.doctor._id,
-                insurance: form.insurance._id,
+                insurance: form.workAccident === "Ja" ? form.patient.insuranceState : form.patient.insurance,
                 pharmacist: form.pharmacist._id,
-                workAccident: form.workAccident === "Yes" ? true : false || false,
+                workAccident: form.workAccident === "Ja" ? true : false || false,
                 date: form.date || new Date(),
                 workAccidentDate: form.workAccidentDate,
-                fees: form.fees === "Yes" ? true : false || false,
+                fees: form.fees === "Ja" ? true : false || false,
                 noctu: form.noctu || '',
                 other: form.other || '',
-                subjectToJustification: form.subjectToJustification === "Yes" ? true : false || '',
-                aut_Idem: form.aut_Idem || '',
+                subjectToJustification: form.subjectToJustification === "Ja" ? true : false || '',
                 deliveryCosts: form.deliveryCosts || '',
                 sonderPZN: form.sonderPZN || '',
                 factor: form.factor || '',
@@ -339,7 +354,11 @@ const Receipt = () => {
     // if (idError) {
     //     return <h1>{idError}</h1>
     // }
-
+    if (loading || (form.patient == null && form.doctor == null && form.pharmacist == null)) {
+        return (
+            <Center>Loading ...</Center>
+        )
+    }
     return (
         <Background>
             <chakra.form w={"100vw"} d={"flex"} onSubmit={onSubmit}>
@@ -347,7 +366,7 @@ const Receipt = () => {
                     <Stack
                         spacing={4}
                         px={10}
-                        bg={useColorModeValue('white', 'gray.700')}
+                        bg={bg}
                         w={"100%"}
                         borderColor={'blue.400'}
                         borderWidth={2}
@@ -362,6 +381,7 @@ const Receipt = () => {
                             patient={patient}
                             handleTextChange={handleTextChange}
                             userIsPatient={userIsPatient}
+                            getAge={getAge}
                         />
                         <Doctor
                             doctor={doctor}
@@ -373,16 +393,12 @@ const Receipt = () => {
                             form={form}
                             handleTextChange={handleTextChange}
                         />
-                        <Insurance
-                            insurance={insurance}
-                            form={form}
-                            handleTextChange={handleTextChange}
-                        />
                         <Fields
                             form={form}
                             handleTextChange={handleTextChange}
                             noctuInTime={noctuInTime}
                             numberOfPacks={numberOfPacks}
+                            setNumberOfPacks={setNumberOfPacks}
                             setSonderPZN={setSonderPZN}
                             sonderPZN={sonderPZN}
                         />

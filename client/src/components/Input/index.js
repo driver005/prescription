@@ -16,7 +16,7 @@ const InputComponent = ({ id, label, type, register, name, value = null, disable
         <FormControl id={id} isInvalid={error} isDisabled={addon || disabled}>
             {!addon && <FormLabel>{label}</FormLabel>}
             <InputGroup>
-                {addon && <InputLeftAddon children={addon} />}
+                {addon && <InputLeftAddon children={label} />}
                 <Input type={type} {...register} name={name} onChange={onChange} value={value} placeholder={placeholder} />
                 {icon && <InputRightElement onClick={onClick} children={icon} />}
             </InputGroup>

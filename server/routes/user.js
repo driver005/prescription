@@ -64,13 +64,6 @@ router.post('/create', async (req, res) => {
     try {
         await newUser
             .save()
-            .populate({
-                path: 'employer',
-                populate: {
-                    path: 'insurance',
-                    model: 'User'
-                }
-            })
         res.status(200).json(newUser);
     } catch (error) {
         res.status(404).json({ message: error.message });

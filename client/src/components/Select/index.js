@@ -24,7 +24,7 @@ const SelectComponent = ({ id, label, values, register, name, onChange, defaultV
                 {({ isOpen }) => (
                     <React.Fragment>
                         <InputGroup>
-                            <AutoCompleteInput name={name} {...register} value={value && value} />
+                            <AutoCompleteInput name={name} {...register} />
                             <InputRightElement children={<Icon as={isOpen ? FiChevronRight : FiChevronDown} />} />
                         </InputGroup>
                         <AutoCompleteList>

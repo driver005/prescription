@@ -123,6 +123,7 @@ router.get('/userId/:id', async (req, res) => {
             }
         }).filter(x => x !== undefined);
 
+
         if (result.length === 0) {
             throw new Error("no Receipt for id found")
         }

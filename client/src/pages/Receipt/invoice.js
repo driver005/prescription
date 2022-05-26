@@ -6,7 +6,7 @@ const Invoice = ({ form }) => {
     return (
         <React.Fragment>
             <Heading paddingTop={10} lineHeight={1.1} fontSize={{ base: 'xl', md: '2xl' }}>
-                Invoice
+                Rechnung
             </Heading>
             <InputComponent
                 id={"additionalPayment"}
@@ -17,7 +17,7 @@ const Invoice = ({ form }) => {
             />
             <InputComponent
                 id={"activeIngredient"}
-                label={"Active ingredient"}
+                label={"Aktiv-Wirkstoff Preis"}
                 name={"activeIngredient"}
                 disabled={true}
                 value={form.activeIngredient && form.activeIngredient}
@@ -38,35 +38,35 @@ const Invoice = ({ form }) => {
             />
             <InputComponent
                 id={"emergencyServiceFee"}
-                label={"Emergency service fee"}
+                label={"Notfalldienstgebühr"}
                 name={"emergencyServiceFee"}
                 disabled={true}
                 value={form.emergencyServiceFee && form.emergencyServiceFee}
             />
             <InputComponent
                 id={"tax"}
-                label={"Tax"}
+                label={"Taxe"}
                 name={"tax"}
                 disabled={true}
                 value={form.tax && form.tax}
             />
             <InputComponent
                 id={"totalGross"}
-                label={"Total gross"}
+                label={"Gesamt-Brutto"}
                 name={"totalGross"}
                 disabled={true}
                 value={form.totalGross && form.totalGross}
             />
             <InputComponent
                 id={"patientTotal"}
-                label={"Patient total"}
+                label={"Patient Total"}
                 name={"patientTotal"}
                 disabled={true}
                 value={form.totalGross && form.fees === "Yes" ? 0 : form.totalGross / 2}
             />
             <InputComponent
                 id={"insuranceTotal"}
-                label={"Insurance total"}
+                label={"Versicherung Total"}
                 name={"insuranceTotal"}
                 disabled={true}
                 value={form.totalGross && form.fees === "Yes" ? form.totalGross : form.totalGross / 2}

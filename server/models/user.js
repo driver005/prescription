@@ -56,6 +56,14 @@ const UserSchema = new mongoose.Schema({
             type: String,
         },
     },
+    insurance: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User',
+    },
+    insuranceState: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User',
+    },
     employer: {
         insurance: {
             type: mongoose.Schema.Types.ObjectId,
