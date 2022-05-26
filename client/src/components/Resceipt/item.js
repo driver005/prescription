@@ -3,7 +3,7 @@ import React from 'react'
 import { BsCheck } from 'react-icons/bs'
 import ButtonComponent from '../Button'
 
-const CardItem = ({ label, patient, doctor, insurance, pharmacist, children }) => {
+const CardItem = ({ label, patient, doctor, insurance, pharmacist, date, children }) => {
     return (
 
         <Box
@@ -48,6 +48,10 @@ const CardItem = ({ label, patient, doctor, insurance, pharmacist, children }) =
                     <ListItem>
                         <ListIcon as={BsCheck} color="green.400" />
                         Apotheke: {pharmacist}
+                    </ListItem>
+                    <ListItem>
+                        <ListIcon as={BsCheck} color="green.400" />
+                        Datum der Ausstellung: {date}
                     </ListItem>
                 </List>
                 {children}

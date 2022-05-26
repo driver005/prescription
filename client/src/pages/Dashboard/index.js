@@ -45,6 +45,7 @@ const Dashbord = () => {
                                 patient={data.patient.name}
                                 insurance={data.insurance.name}
                                 pharmacist={data.pharmacist.name}
+                                date={data.createdAt}
                             >
                                 {(user.type === "doctor" || user.type === "pharmacist") && <ButtonComponent label={"Edit"} onClick={() => handelClick(data._id)} />}
                             </CardItem>
