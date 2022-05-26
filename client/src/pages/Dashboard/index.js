@@ -47,7 +47,7 @@ const Dashbord = () => {
                                 pharmacist={data.pharmacist.name}
                                 date={data.createdAt}
                             >
-                                {(user.type === "doctor" || user.type === "pharmacist") && <ButtonComponent label={"Edit"} onClick={() => handelClick(data._id)} />}
+                                {(user.type === "pharmacist") && <ButtonComponent label={"Edit"} onClick={() => handelClick(data._id)} />}
                             </CardItem>
                         ))}
                     </CardContainer>
