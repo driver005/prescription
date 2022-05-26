@@ -354,10 +354,12 @@ const Receipt = () => {
     // if (idError) {
     //     return <h1>{idError}</h1>
     // }
-    if (loading || (form.patient == null && form.doctor == null && form.pharmacist == null)) {
-        return (
-            <Center>Loading ...</Center>
-        )
+    if (id) {
+        if (loading || (form.patient == null && form.doctor == null && form.pharmacist == null)) {
+            return (
+                <Center>Loading ...</Center>
+            )
+        }
     }
     return (
         <Background>
