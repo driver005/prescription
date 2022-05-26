@@ -2,7 +2,7 @@ import React from 'react'
 import InputComponent from '../../components/Input'
 import SelectComponent from '../../components/Select'
 
-const Doctor = ({ doctor, form, handleTextChange }) => {
+const Doctor = ({ doctor, form, handleTextChange, userIsDoctor }) => {
     return (
         <React.Fragment>
             <SelectComponent
@@ -12,7 +12,7 @@ const Doctor = ({ doctor, form, handleTextChange }) => {
                 value={form.doctor && form.doctor.name}
                 values={doctor.map(user => user.name)}
                 onChange={(e) => handleTextChange(doctor.find(user => user.name === e), "doctor", true)}
-                defaultValue={form.doctor && form.doctor.name}
+                defaultValue={userIsDoctor ? doctor.map(user => user.name)[0] : form.doctor && form.doctor.name}
             />
             <InputComponent
                 id={"lanr"}

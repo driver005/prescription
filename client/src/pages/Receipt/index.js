@@ -73,12 +73,12 @@ const Receipt = () => {
     const navigate = useNavigate();
     let { id } = useParams();
     const [loading, setLoading] = useState(true)
-    const userIsPatient = JSON.parse(localStorage.getItem('user')).type === "patient"
+    const userIsPatient = JSON.parse(localStorage.getItem('user')).type === "doctor"
     const [form, setForm] = React.useState(initialState);
     const [formProducts, setFormProducts] = React.useState(initialStateProducts);
-    const [patient, setPatient] = useState(userIsPatient ? [JSON.parse(localStorage.getItem('user'))] : [])
+    const [patient, setPatient] = useState([])
     const [insurance, setInsurance] = useState([])
-    const [doctor, setDoctor] = useState([])
+    const [doctor, setDoctor] = useState(userIsPatient ? [JSON.parse(localStorage.getItem('user'))] : [])
     const [medication, setMedication] = useState([])
     const [products, setProducts] = useState([])
     const [pharmacist, setPharmacist] = useState([])
@@ -91,14 +91,14 @@ const Receipt = () => {
         api.fetchUsers().then((data) => {
             const users = data.data
             setInsurance(users.filter(user => user.type === 'insurance'))
-            setDoctor(users.filter(user => user.type === 'doctor'))
+            setPatient(users.filter(user => user.type === 'patient'))
             setPharmacist(users.filter(user => user.type === 'pharmacist'))
 
 
             if (!userIsPatient) {
-                setPatient(users.filter(user => user.type === 'patient'))
+                setDoctor(users.filter(user => user.type === 'doctor'))
             } else {
-                handleTextChange(patient.map(user => user.name)[0], 'patient')
+                handleTextChange(doctor[0], "doctor", true)
             }
         })
 
@@ -382,12 +382,12 @@ const Receipt = () => {
                             form={form}
                             patient={patient}
                             handleTextChange={handleTextChange}
-                            userIsPatient={userIsPatient}
                             getAge={getAge}
                         />
                         <Doctor
                             doctor={doctor}
                             form={form}
+                            userIsDoctor={userIsPatient}
                             handleTextChange={handleTextChange}
                         />
                         <Pharmacist
