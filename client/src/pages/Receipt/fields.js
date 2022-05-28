@@ -4,8 +4,8 @@ import InputComponent from '../../components/Input'
 import SelectComponent from '../../components/Select'
 
 const bool = [
-    "Ja",
-    "Nein",
+    "X",
+    "(leer)",
 ];
 
 
@@ -35,12 +35,12 @@ const Fields = ({ form, handleTextChange, noctuInTime, sonderPZN, setSonderPZN, 
                 label={"Arbeitsunfalltag"}
                 name={"workAccidentDate"}
                 type={"text"}
-                value={form.workAccident === "Ja" ? form.workAccidentDate : ""}
-                disabled={form.workAccident === "Nein" ? true : !userIsDoctor && true}
+                value={form.workAccident === "X" ? form.workAccidentDate : ""}
+                disabled={form.workAccident === "(leer)" ? true : !userIsDoctor && true}
             />
             <SelectComponent
                 id={"fees"}
-                label={"Gebühren (falls der Patient unter 18 ist muss hier Nein ausgewählt werden)"}
+                label={"Gebühren (falls der Patient unter 18 ist muss hier (leer) ausgewählt werden)"}
                 name={"fees"}
                 value={form.fees && form.fees}
                 values={bool}

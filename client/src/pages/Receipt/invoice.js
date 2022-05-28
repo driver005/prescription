@@ -18,7 +18,7 @@ const Invoice = ({ form }) => {
             />
             <InputComponent
                 id={"activeIngredient"}
-                label={"Aktiv-Wirkstoff Preis"}
+                label={"Aktiv-Wirkstoff maximal Preis"}
                 name={"activeIngredient"}
                 disabled={true}
                 value={form.activeIngredient && form.activeIngredient}
@@ -69,7 +69,13 @@ const Invoice = ({ form }) => {
                 label={"Patient Total"}
                 name={"patientTotal"}
                 disabled={true}
-                value={form.totalGross && form.fees === "Nein" ? 0 : (form.noctu && form.noctu === "Nein") ? form.totalGross / 2 - form.emergencyServiceFee : form.totalGross / 2}
+                value={form.totalGross && form.fees === "(leer)" ?
+                    0
+                    :
+                    form.noctu === "(leer)" ?
+                        form.totalGross / 2 - form.emergencyServiceFee
+                        : form.totalGross / 2
+                }
                 icon={'€'}
             />
             <InputComponent
@@ -77,7 +83,14 @@ const Invoice = ({ form }) => {
                 label={"Versicherung Total"}
                 name={"insuranceTotal"}
                 disabled={true}
-                value={form.totalGross && form.fees === "Nein" ? (form.noctu && form.noctu === "Ja") ? form.totalGross - form.emergencyServiceFee : form.totalGross : (form.noctu && form.noctu === "Ja") ? form.totalGross / 2 - form.emergencyServiceFee : form.totalGross / 2}
+                value={form.totalGross && form.fees === "(leer)" ?
+                    form.noctu === "X" ?
+                        form.totalGross - form.emergencyServiceFee
+                        : form.totalGross
+                    : form.noctu === "X" ?
+                        form.totalGross / 2 - form.emergencyServiceFee
+                        : form.totalGross / 2
+                }
                 icon={'€'}
             />
         </React.Fragment >

@@ -115,13 +115,13 @@ const Receipt = () => {
                         doctor: data.data.doctor,
                         insurance: data.data.insurance,
                         pharmacist: data.data.pharmacist,
-                        workAccident: data.data.workAccident === true ? "Ja" : "Nein",
+                        workAccident: data.data.workAccident === true ? "X" : "(leer)",
                         date: data.data.date,
                         workAccidentDate: data.data.workAccidentDate,
-                        fees: data.data.fees === true ? "Ja" : "Nein",
+                        fees: data.data.fees === true ? "X" : "(leer)",
                         noctu: data.data.noctu,
                         other: data.data.other,
-                        subjectToJustification: data.data.subjectToJustification === true ? "Ja" : "Nein",
+                        subjectToJustification: data.data.subjectToJustification === true ? "X" : "(leer)r)",
                         deliveryCosts: data.data.deliveryCosts,
                         sonderPZN: data.data.sonderPZN,
                         factor: data.data.factor,
@@ -286,15 +286,15 @@ const Receipt = () => {
             const data = {
                 patient: form.patient._id,
                 doctor: form.doctor._id,
-                insurance: form.workAccident === "Ja" ? form.patient.insuranceState : form.patient.insurance,
+                insurance: form.workAccident === "X" ? form.patient.insuranceState : form.patient.insurance,
                 pharmacist: form.pharmacist._id,
-                workAccident: form.workAccident === "Ja" ? true : false || false,
+                workAccident: form.workAccident === "X" ? true : false || false,
                 date: form.date || new Date(),
                 workAccidentDate: form.workAccidentDate,
-                fees: form.fees === "Ja" ? true : false || false,
+                fees: form.fees === "X" ? true : false || false,
                 noctu: form.noctu || '',
                 other: form.other || '',
-                subjectToJustification: form.subjectToJustification === "Ja" ? true : false || '',
+                subjectToJustification: form.subjectToJustification === "X" ? true : false || '',
                 deliveryCosts: form.deliveryCosts || '',
                 sonderPZN: form.sonderPZN || '',
                 factor: form.factor || '',
@@ -384,7 +384,7 @@ const Receipt = () => {
                             py={6}
                         >
                             <Heading lineHeight={1.1} fontSize={{ base: '2xl', md: '3xl' }}>
-                                Für wenn is das Rezept
+                                Zugehörigkeit
                             </Heading>
                             <Patient
                                 form={form}
@@ -415,7 +415,7 @@ const Receipt = () => {
                             py={6}
                         >
                             <Heading lineHeight={1.1} fontSize={{ base: '2xl', md: '3xl' }}>
-                                Rezept
+                                Situation
                             </Heading>
                             <Fields
                                 form={form}

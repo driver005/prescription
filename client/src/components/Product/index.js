@@ -17,16 +17,16 @@ const Product = ({ products, medication, form, handleTextChange, isOpen, setIsOp
     ]
 
     const bool = [
-        "Ja",
-        "Nein",
+        "X",
+        "(leer)",
     ];
 
     return (
         <CustomCardWrapper
             width='45%'
-            label={'Produkt'}
-            modalLabel={"Produkt Hinzufügen"}
-            isOpen={isOpen}
+            label={'Mittel'}
+            modalLabel={"Mittel Hinzufügen"}
+            isOpen={products.length >= 1 ? false : isOpen}
             setIsOpen={setIsOpen}
             handelOnClose={handelOnClose}
             modalChildren={
@@ -34,9 +34,9 @@ const Product = ({ products, medication, form, handleTextChange, isOpen, setIsOp
                     spacing={4}
                 >
                     <SelectComponent
-                        id={"arzneimittel"}
-                        label={"Arzneimittel"}
-                        name={"arzneimittel"}
+                        id={"mittel"}
+                        label={"Mittel"}
+                        name={"mittel"}
                         value={form.medication && form.medication.name}
                         values={medication.map(medication => medication.name)}
                         onChange={(e) => handleTextChange(medication.find(meds => meds.name === e), "medication")}
@@ -85,16 +85,6 @@ const Product = ({ products, medication, form, handleTextChange, isOpen, setIsOp
                         values={bool}
                         onChange={(e) => handleTextChange(e, "aut_Idem")}
                     />
-                    <FormControl id={"dosis"}>
-                        <FormLabel>Dosis</FormLabel>
-                        <NumberInput defaultValue={1} value={form.dosis} onChange={(e) => handleTextChange(e, "dosis")}>
-                            <NumberInputField />
-                            <NumberInputStepper>
-                                <NumberIncrementStepper />
-                                <NumberDecrementStepper />
-                            </NumberInputStepper>
-                        </NumberInput>
-                    </FormControl>
                 </Stack>
             }
         >
