@@ -14,6 +14,7 @@ const Invoice = ({ form }) => {
                 name={"additionalPayment"}
                 disabled={true}
                 value={form.additionalPayment && form.additionalPayment}
+                icon={'€'}
             />
             <InputComponent
                 id={"activeIngredient"}
@@ -21,6 +22,7 @@ const Invoice = ({ form }) => {
                 name={"activeIngredient"}
                 disabled={true}
                 value={form.activeIngredient && form.activeIngredient}
+                icon={'€'}
             />
             <InputComponent
                 id={"additionalCosts"}
@@ -28,6 +30,7 @@ const Invoice = ({ form }) => {
                 name={"additionalCosts"}
                 disabled={true}
                 value={form.additionalCosts && form.additionalCosts}
+                icon={'€'}
             />
             <InputComponent
                 id={"deliveryCost"}
@@ -35,6 +38,7 @@ const Invoice = ({ form }) => {
                 name={"deliveryCost"}
                 disabled={true}
                 value={form.deliveryCosts && form.deliveryCosts}
+                icon={'€'}
             />
             <InputComponent
                 id={"emergencyServiceFee"}
@@ -42,6 +46,7 @@ const Invoice = ({ form }) => {
                 name={"emergencyServiceFee"}
                 disabled={true}
                 value={form.emergencyServiceFee && form.emergencyServiceFee}
+                icon={'€'}
             />
             <InputComponent
                 id={"tax"}
@@ -49,6 +54,7 @@ const Invoice = ({ form }) => {
                 name={"tax"}
                 disabled={true}
                 value={form.tax && form.tax}
+                icon={'€'}
             />
             <InputComponent
                 id={"totalGross"}
@@ -56,20 +62,23 @@ const Invoice = ({ form }) => {
                 name={"totalGross"}
                 disabled={true}
                 value={form.totalGross && form.totalGross}
+                icon={'€'}
             />
             <InputComponent
                 id={"patientTotal"}
                 label={"Patient Total"}
                 name={"patientTotal"}
                 disabled={true}
-                value={form.totalGross && form.fees === "Yes" ? 0 : form.totalGross / 2}
+                value={form.totalGross && form.fees === "Nein" ? 0 : (form.noctu && form.noctu === "Nein") ? form.totalGross / 2 - form.emergencyServiceFee : form.totalGross / 2}
+                icon={'€'}
             />
             <InputComponent
                 id={"insuranceTotal"}
                 label={"Versicherung Total"}
                 name={"insuranceTotal"}
                 disabled={true}
-                value={form.totalGross && form.fees === "Yes" ? form.totalGross : form.totalGross / 2}
+                value={form.totalGross && form.fees === "Nein" ? (form.noctu && form.noctu === "Ja") ? form.totalGross - form.emergencyServiceFee : form.totalGross : (form.noctu && form.noctu === "Ja") ? form.totalGross / 2 - form.emergencyServiceFee : form.totalGross / 2}
+                icon={'€'}
             />
         </React.Fragment >
     )

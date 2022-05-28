@@ -16,6 +16,11 @@ const Product = ({ products, medication, form, handleTextChange, isOpen, setIsOp
         "Dosis",
     ]
 
+    const bool = [
+        "Ja",
+        "Nein",
+    ];
+
     return (
         <CustomCardWrapper
             width='45%'
@@ -74,10 +79,10 @@ const Product = ({ products, medication, form, handleTextChange, isOpen, setIsOp
                     />
                     <SelectComponent
                         id={"aut_Idem"}
-                        label={"aut. Idem"}
+                        label={"aut. Idem (Die Verweigerung der Supplimentierung darf auschließlich aufgrund von ärztlichen Bedenken geschehen.)"}
                         name={"aut_Idem"}
                         value={form.aut_Idem && form.aut_Idem}
-                        values={["Die Verweigerung der Supplimentierung darf auschließlich aufgrund von ärztlichen Bedenken geschehen.", "Die Verweigerung der Supplimentierung ist erlaubt."]}
+                        values={bool}
                         onChange={(e) => handleTextChange(e, "aut_Idem")}
                     />
                     <FormControl id={"dosis"}>

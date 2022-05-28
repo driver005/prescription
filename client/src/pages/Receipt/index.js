@@ -84,7 +84,7 @@ const Receipt = () => {
     const [pharmacist, setPharmacist] = useState([])
     const [isOpen, setIsOpen] = useState(false)
     const [sonderPZN, setSonderPZN] = useState(["02567024", "09999637"])
-    const [numberOfPacks, setNumberOfPacks] = useState(1)
+    const [numberOfPacks, setNumberOfPacks] = useState()
     const forceUpdate = useForceUpdate();
 
     useEffect(() => {
@@ -167,26 +167,33 @@ const Receipt = () => {
         })
 
         var pricetax = price
+        var additionalprice = price
         var pricePayment = price
+        var additionalCosts = price - priceIngredient
 
-        if (price * 0.1 > 10) {
-            price = 10
-        } else if (price * 0.1 < 5) {
-            price = 5
+        if (additionalprice * 0.1 > 10) {
+            additionalprice = 10
+        } else if (additionalprice * 0.1 < 5) {
+            additionalprice = 5
         } else {
-            price = price * 0.1
+            additionalprice = additionalprice * 0.1
         }
 
-        if (noctuInTime) {
+        if (!noctuInTime()) {
             priceEmergencyServiceFee = 2.5
         }
 
-        if (pricetax < price) {
+        if (pricetax < additionalprice) {
             pricetax = 0
         }
-        totalGross = price + priceIngredient + (price - priceIngredient) + form.deliveryCosts + priceEmergencyServiceFee
+
+        if (price - priceIngredient < 0) {
+            additionalCosts = 0
+        }
+
+        totalGross = additionalprice + priceIngredient + additionalCosts + form.deliveryCosts + priceEmergencyServiceFee
         handleTextChange(
-            [price, priceIngredient, pricePayment, price - priceIngredient, priceEmergencyServiceFee, pricetax, totalGross],
+            [additionalprice, priceIngredient, pricePayment, additionalCosts, priceEmergencyServiceFee, pricetax, totalGross],
             ["additionalPayment", "activeIngredient", "payment", "additionalCosts", "emergencyServiceFee", "tax", "totalGross"]
         )
     }, [products])

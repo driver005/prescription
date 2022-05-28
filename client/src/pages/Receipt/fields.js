@@ -52,7 +52,7 @@ const Fields = ({ form, handleTextChange, noctuInTime, sonderPZN, setSonderPZN, 
                 label={"Noctu (nur auswehlbar zwischen 22 Uhr und 6 Uhr morgens)"}
                 name={"noctu"}
                 value={form.noctu && form.noctu}
-                values={["Der Patient hat die Medizin in einer dringlichen Situation geholt. Es entspricht dem Zweck des nächtlichen Apothekennotdienstes."]}
+                values={bool}
                 onChange={(e) => handleTextChange(e, "noctu")}
                 disabled={noctuInTime() || userIsDoctor}
                 defaultValue={form.noctu && form.noctu}
@@ -126,7 +126,7 @@ const Fields = ({ form, handleTextChange, noctuInTime, sonderPZN, setSonderPZN, 
             />
             <FormControl id={"numberOfPacks"} isDisabled={userIsDoctor}>
                 <FormLabel>Verpackungsanzahl</FormLabel>
-                <NumberInput defaultValue={0} value={numberOfPacks} onChange={(e) => setNumberOfPacks(e)} disabled={userIsDoctor}>
+                <NumberInput value={numberOfPacks} onChange={(e) => setNumberOfPacks(e)} disabled={userIsDoctor}>
                     <NumberInputField />
                     <NumberInputStepper>
                         <NumberIncrementStepper />
